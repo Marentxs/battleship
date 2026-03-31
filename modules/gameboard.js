@@ -1,6 +1,7 @@
 class Gameboard {
   constructor() {
     this.grid = [];
+    this.ships = [];
     for (let i = 0; i < 10; i++) {
       const row = [];
       for (let j = 0; j < 10; j++) {
@@ -26,11 +27,13 @@ class Gameboard {
       for (let i = 0; i < size; i++) {
         this.grid[row][column + i] = ship;
       }
+      this.ships.push(ship);
     }
     if (direction === "vertical") {
       for (let i = 0; i < size; i++) {
         this.grid[row + i][column] = ship;
       }
+      this.ships.push(ship);
     }
   }
 
@@ -49,6 +52,10 @@ class Gameboard {
       this.grid[row][column] = "miss";
       return "miss";
     }
+  }
+
+  allSunk() {
+    return this.ships.every((ship) => ship.isSunk());
   }
 }
 
