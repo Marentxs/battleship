@@ -13,3 +13,18 @@ test("Ship sinks", () => {
   ship.hit();
   expect(ship.isSunk()).toBe(true);
 });
+
+test("Grid dimensions", () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.grid.length).toBe(10);
+  expect(gameboard.grid[0].length).toBe(10);
+});
+
+test("Ship placement", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(2);
+  gameboard.place(ship, 5, 5, "horizontal");
+  expect(gameboard.grid[5][5]).toBe(ship);
+  expect(gameboard.grid[5][6]).toBe(ship);
+  expect(gameboard.grid[5][7]).toBe(null);
+});
