@@ -12,6 +12,16 @@ class Gameboard {
 
   place(ship, row, column, direction) {
     const size = ship.length;
+
+    if (direction !== "horizontal" && direction !== "vertical") {
+      direction = "horizontal";
+    }
+
+    if (direction === "horizontal" && column + size > 10)
+      throw new Error("Out of grid, check row and column");
+    if (direction === "vertical" && row + size > 10)
+      throw new Error("Out of grid, check row and column");
+
     if (direction === "horizontal") {
       for (let i = 0; i < size; i++) {
         this.grid[row][column + i] = ship;
