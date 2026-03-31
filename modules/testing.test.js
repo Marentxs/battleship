@@ -28,3 +28,19 @@ test("Ship placement", () => {
   expect(gameboard.grid[5][6]).toBe(ship);
   expect(gameboard.grid[5][7]).toBe(null);
 });
+
+test("Attack function", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(2);
+  gameboard.place(ship, 5, 5, "horizontal");
+  gameboard.receiveAttack(5, 5);
+  expect(gameboard.grid[5][5]).toBe("hit");
+});
+
+test("Missed shot", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(2);
+  gameboard.place(ship, 4, 4, "horizontal");
+  gameboard.receiveAttack(2, 2);
+  expect(gameboard.grid[2][2]).toBe("miss");
+});

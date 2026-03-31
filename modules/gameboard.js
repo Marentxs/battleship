@@ -46,7 +46,7 @@ class Gameboard {
       this.grid[row][column] = "hit";
       return "hit";
     } else {
-      target = "miss";
+      this.grid[row][column] = "miss";
       return "miss";
     }
   }
