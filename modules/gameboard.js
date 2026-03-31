@@ -33,6 +33,23 @@ class Gameboard {
       }
     }
   }
+
+  receiveAttack(row, column) {
+    const target = this.grid[row][column];
+
+    if (target === "hit" || target === "miss") {
+      throw new Error("You already shot here");
+    }
+
+    if (target !== null) {
+      target.hit();
+      this.grid[row][column] = "hit";
+      return "hit";
+    } else {
+      target = "miss";
+      return "miss";
+    }
+  }
 }
 
 export default Gameboard;
