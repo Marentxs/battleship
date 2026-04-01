@@ -10,4 +10,11 @@ class Computer extends Player {
   constructor() {
     super();
   }
+
+  makeRandomMove(opponentGameboard) {
+    const first = Math.floor(Math.random() * 10);
+    const second = Math.floor(Math.random() * 10);
+
+    return opponentGameboard.receiveAttack(first, second);
+  }
 }
