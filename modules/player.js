@@ -18,3 +18,6 @@ class Computer extends Player {
     return opponentGameboard.receiveAttack(first, second);
   }
 }
+
+export default Computer;
+export { Player };
