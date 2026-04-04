@@ -11,30 +11,51 @@ class Gameboard {
     }
   }
 
-  place(ship, row, column, direction) {
+  canPlace(ship, row, column, direction) {
     const size = ship.length;
 
     if (direction !== "horizontal" && direction !== "vertical") {
-      direction = "horizontal";
+      return false;
     }
 
-    if (direction === "horizontal" && column + size > 10)
-      throw new Error("Out of grid, check row and column");
-    if (direction === "vertical" && row + size > 10)
-      throw new Error("Out of grid, check row and column");
+    if (direction === "horizontal" && column + size > 10) return false;
+    if (direction === "vertical" && row + size > 10) return false;
+
+    if (direction === "horizontal") {
+      for (let i = 0; i < size; i++) {
+        if (this.grid[row][column + i] !== null) {
+          return false;
+        }
+      }
+    }
+    if (direction === "vertical") {
+      for (let i = 0; i < size; i++) {
+        if (this.grid[row + i][column] !== null) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  place(ship, row, column, direction) {
+    const size = ship.length;
+
+    if (!this.canPlace(ship, row, column, direction)) {
+      throw new Error("Invalid placement, try again");
+    }
 
     if (direction === "horizontal") {
       for (let i = 0; i < size; i++) {
         this.grid[row][column + i] = ship;
       }
-      this.ships.push(ship);
     }
     if (direction === "vertical") {
       for (let i = 0; i < size; i++) {
         this.grid[row + i][column] = ship;
       }
-      this.ships.push(ship);
     }
+    this.ships.push(ship);
   }
 
   receiveAttack(row, column) {
