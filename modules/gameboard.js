@@ -58,11 +58,24 @@ class Gameboard {
     this.ships.push(ship);
   }
 
+  canAttack(row, column) {
+    const target = this.grid[row][column];
+
+    if (row < 0 || row > 9 || column < 0 || column > 9) {
+      return false;
+    }
+    if (target === "hit" || target === "miss") {
+      return false;
+    }
+
+    return true;
+  }
+
   receiveAttack(row, column) {
     const target = this.grid[row][column];
 
-    if (target === "hit" || target === "miss") {
-      throw new Error("You already shot here");
+    if (!this.canAttack(row, column)) {
+      throw new Error("Invalid attack, try again");
     }
 
     if (target !== null) {

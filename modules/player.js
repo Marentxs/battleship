@@ -11,11 +11,18 @@ class Computer extends Player {
     super();
   }
 
-  makeRandomMove(opponentGameboard) {
-    const row = Math.floor(Math.random() * 10);
-    const col = Math.floor(Math.random() * 10);
+  makeRandomMove(opponent) {
+    let attacked = false;
 
-    return opponentGameboard.receiveAttack(row, col);
+    while (!attacked) {
+      const row = Math.floor(Math.random() * 10);
+      const col = Math.floor(Math.random() * 10);
+
+      if (opponent.gameboard.canAttack(row, col)) {
+        attacked = true;
+        return opponent.gameboard.receiveAttack(row, col);
+      }
+    }
   }
 
   placeRandom(ownShip) {
@@ -29,8 +36,8 @@ class Computer extends Player {
       const direction = directions[Math.floor(Math.random() * 2)];
 
       if (this.gameboard.canPlace(ownShip, row, col, direction)) {
-        this.gameboard.place(ownShip, row, col, direction);
         placed = true;
+        return this.gameboard.place(ownShip, row, col, direction);
       }
     }
   }
