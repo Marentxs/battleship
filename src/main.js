@@ -1,5 +1,6 @@
 import Ship from "../modules/ship.js";
-import Computer, { Player } from "../modules/player.js";
+import Player from "../modules/player.js";
+import Computer from "../modules/computer.js";
 
 const human = new Player();
 const computer = new Computer();
@@ -11,18 +12,39 @@ const computerShip = new Ship(2);
 const computerShip2 = new Ship(3);
 const computerShip3 = new Ship(4);
 
-const turn = "human";
+function gameLogic() {
+  placeRandom(computerShip);
+  placeRandom(computerShip2);
+  placeRandom(computerShip3);
 
-while (
-  human.gameboard.allSunk() !== true &&
-  computer.gameboard.allSunk() !== true
-) {
-  if (turn === "human") {
-    // Logic for human attack via console
-    turn = "computer";
+  console.log("Start by placing your three ships");
+
+  placementCoordinates(humanShip);
+  placementCoordinates(humanShip2);
+  placementCoordinates(humanShip3);
+
+  console.log("Now let's get to shooting");
+
+  const turn = "human";
+
+  while (
+    human.gameboard.allSunk() !== true &&
+    computer.gameboard.allSunk() !== true
+  ) {
+    if (turn === "human") {
+      attackCoordinates(computer);
+      turn = "computer";
+    } else {
+      makeRandomAttack(human);
+      turn = "human";
+    }
+  }
+
+  if (human.gameboard.allSunk() === true) {
+    console.log("Computer won, all human ships have been sunk");
   } else {
-    // Calls function for random attack
-    turn = "human";
+    console.log("Human won, all computer ships have been sunk");
   }
 }
-// if game ended check who lost all ships, console log loser
+
+gameLogic();
