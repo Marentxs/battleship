@@ -28,6 +28,7 @@ class Player {
 
       if (this.gameboard.canPlace(ship, row, col, dir)) {
         this.gameboard.place(ship, row, col, dir);
+        console.log("Ship placed correctly");
         placed = true;
       } else {
         console.log("Invalid directions, try again");
@@ -37,10 +38,35 @@ class Player {
   }
 
   attackCoordinates(opponent) {
-    let row = parseFloat(prompt("Enter row number to attack"));
-    let col = parseFloat(prompt("Enter col number to attack"));
+    let attacked = false;
+    while (!attacked) {
+      let rawRow = prompt("Enter row number to attack");
+      let rawCol = prompt("Enter col number to attack");
 
-    opponent.gameboard.receiveAttack(row, col);
+      if (rawRow === null || rawCol === null) {
+        console.log("Game cancelled");
+        continue;
+      }
+
+      let row = parseFloat(rawRow);
+      let col = parseFloat(rawCol);
+
+      if (isNaN(row) || isNaN(col)) {
+        console.log("Invalid number, please try again");
+        continue;
+      }
+
+      if (opponent.gameboard.canAttack(row, col)) {
+        opponent.gameboard.receiveAttack(row, col);
+        console.log("Attack placed correctly");
+        let result = opponent.gameboard.receiveAttack(row, col);
+        console.log(`You got a ${result}`);
+        attacked = true;
+      } else {
+        console.log("Invalid attack coordinates, try again");
+        continue;
+      }
+    }
   }
 }
 
