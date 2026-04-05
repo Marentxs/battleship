@@ -5,7 +5,7 @@ class Computer extends Player {
     super();
   }
 
-  makeRandomMove(opponent) {
+  makeRandomAttack(opponent) {
     let attacked = false;
 
     while (!attacked) {
