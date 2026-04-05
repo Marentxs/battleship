@@ -4,44 +4,21 @@ class Player {
   constructor() {
     this.gameboard = new Gameboard();
   }
-}
 
-class Computer extends Player {
-  constructor() {
-    super();
+  placementCoordinates(ship) {
+    let row = parseFloat(prompt("Enter row number for ship"));
+    let col = parseFlat(prompt("Enter col number for ship"));
+    let dir = prompt("Enter direction for ship");
+
+    this.gameboard.place(ship, row, col, dir);
   }
 
-  makeRandomMove(opponent) {
-    let attacked = false;
+  attackCoordinates(opponent) {
+    let row = parseFloat(prompt("Enter row number to attack"));
+    let col = parseFlat(prompt("Enter col number to attack"));
 
-    while (!attacked) {
-      const row = Math.floor(Math.random() * 10);
-      const col = Math.floor(Math.random() * 10);
-
-      if (opponent.gameboard.canAttack(row, col)) {
-        attacked = true;
-        return opponent.gameboard.receiveAttack(row, col);
-      }
-    }
-  }
-
-  placeRandom(ownShip) {
-    let placed = false;
-
-    while (!placed) {
-      const row = Math.floor(Math.random() * 10);
-      const col = Math.floor(Math.random() * 10);
-
-      const directions = ["horizontal, vertical"];
-      const direction = directions[Math.floor(Math.random() * 2)];
-
-      if (this.gameboard.canPlace(ownShip, row, col, direction)) {
-        placed = true;
-        return this.gameboard.place(ownShip, row, col, direction);
-      }
-    }
+    opponent.gameboard.receiveAttack(row, col);
   }
 }
 
-export default Computer;
-export { Player };
+export default Player;

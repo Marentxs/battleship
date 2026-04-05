@@ -1,7 +1,8 @@
 import { test, expect } from "@jest/globals";
 import Ship from "./ship.js";
 import Gameboard from "./gameboard.js";
-import Computer, { Player } from "./player.js";
+import Player from "./player.js";
+import Computer from "./computer.js";
 
 test("Ship registers hits", () => {
   const ship = new Ship(2);
