@@ -27,10 +27,7 @@ function gameLogic() {
 
   let turn = "human";
 
-  while (
-    human.gameboard.allSunk() !== true &&
-    computer.gameboard.allSunk() !== true
-  ) {
+  while (true) {
     if (turn === "human") {
       human.attackCoordinates(computer);
 
