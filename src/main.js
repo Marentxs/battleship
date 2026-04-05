@@ -13,37 +13,41 @@ const computerShip2 = new Ship(3);
 const computerShip3 = new Ship(4);
 
 function gameLogic() {
-  placeRandom(computerShip);
-  placeRandom(computerShip2);
-  placeRandom(computerShip3);
+  computer.placeRandom(computerShip);
+  computer.placeRandom(computerShip2);
+  computer.placeRandom(computerShip3);
 
   console.log("Start by placing your three ships");
 
-  placementCoordinates(humanShip);
-  placementCoordinates(humanShip2);
-  placementCoordinates(humanShip3);
+  human.placementCoordinates(humanShip);
+  human.placementCoordinates(humanShip2);
+  human.placementCoordinates(humanShip3);
 
   console.log("Now let's get to shooting");
 
-  const turn = "human";
+  let turn = "human";
 
   while (
     human.gameboard.allSunk() !== true &&
     computer.gameboard.allSunk() !== true
   ) {
     if (turn === "human") {
-      attackCoordinates(computer);
+      human.attackCoordinates(computer);
+
+      if (computer.gameboard.allSunk() === true) {
+        return console.log("Computer won, all human ships have been sunk");
+      }
+
       turn = "computer";
     } else {
-      makeRandomAttack(human);
+      computer.makeRandomAttack(human);
+
+      if (human.gameboard.allSunk() === true) {
+        return console.log("Computer won, all human ships have been sunk");
+      }
+
       turn = "human";
     }
-  }
-
-  if (human.gameboard.allSunk() === true) {
-    console.log("Computer won, all human ships have been sunk");
-  } else {
-    console.log("Human won, all computer ships have been sunk");
   }
 }
 

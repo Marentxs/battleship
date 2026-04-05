@@ -15,7 +15,7 @@ class Player {
 
   attackCoordinates(opponent) {
     let row = parseFloat(prompt("Enter row number to attack"));
-    let col = parseFlat(prompt("Enter col number to attack"));
+    let col = parseFloat(prompt("Enter col number to attack"));
 
     opponent.gameboard.receiveAttack(row, col);
   }

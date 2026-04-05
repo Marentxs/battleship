@@ -56,7 +56,7 @@ test("Missed shot", () => {
 test("Computer shots", () => {
   const human = new Player();
   const computer = new Computer();
-  computer.makeRandomMove(human.gameboard);
+  computer.makeRandomAttack(human.gameboard);
 
   const hasNonNullValue = human.gameboard.grid.some((cell) => cell !== null);
   expect(hasNonNullValue).toBe(true);
