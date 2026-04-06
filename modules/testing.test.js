@@ -61,3 +61,17 @@ test("Computer shots", () => {
   const hasNonNullValue = human.gameboard.grid.some((cell) => cell !== null);
   expect(hasNonNullValue).toBe(true);
 });
+
+test("allSunk returns false until all ships are sunk", () => {
+  const gameboard = new Gameboard();
+  const ship1 = new Ship(1);
+  const ship2 = new Ship(2);
+  gameboard.place(ship1, 1, 1, "horizontal");
+  gameboard.place(ship2, 2, 2, "horizontal");
+
+  expect(gameboard.allSunk()).toBe(false);
+  gameboard.receiveAttack(1, 1);
+  expect(gameboard.allSunk()).toBe(false);
+  gameboard.receiveAttack(2, 2);
+  expect(gameboard.allSunk()).toBe(true);
+});
