@@ -88,3 +88,15 @@ test("canPlace returns false for overlap", () => {
   expect(gameboard.grid[5][6]).toBe(ship1);
   expect(gameboard.grid[6][5]).toBe(null);
 });
+
+test("receiveAttack prevents re-attacking", () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(2);
+  gameboard.place(ship, 5, 5, "horizontal");
+  gameboard.receiveAttack(5, 5);
+
+  expect(() => {
+    gameboard.receiveAttack(5, 5);
+  }).toThrow("Invalid attack, try again");
+  expect(ship.hits).toBe(1);
+});
