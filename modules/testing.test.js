@@ -56,7 +56,7 @@ test("Missed shot", () => {
 test("Computer shots", () => {
   const human = new Player();
   const computer = new Computer();
-  computer.makeRandomAttack(human.gameboard);
+  computer.makeRandomAttack(human);
 
   const hasNonNullValue = human.gameboard.grid.some((cell) => cell !== null);
   expect(hasNonNullValue).toBe(true);
@@ -65,7 +65,7 @@ test("Computer shots", () => {
 test("allSunk returns false until all ships are sunk", () => {
   const gameboard = new Gameboard();
   const ship1 = new Ship(1);
-  const ship2 = new Ship(2);
+  const ship2 = new Ship(1);
   gameboard.place(ship1, 1, 1, "horizontal");
   gameboard.place(ship2, 2, 2, "horizontal");
 
@@ -74,4 +74,17 @@ test("allSunk returns false until all ships are sunk", () => {
   expect(gameboard.allSunk()).toBe(false);
   gameboard.receiveAttack(2, 2);
   expect(gameboard.allSunk()).toBe(true);
+});
+
+test("canPlace returns false for overlap", () => {
+  const gameboard = new Gameboard();
+  const ship1 = new Ship(2);
+  const ship2 = new Ship(2);
+  gameboard.place(ship1, 5, 5, "horizontal");
+
+  expect(gameboard.canPlace(ship2, 5, 5, "vertical")).toBe(false);
+  expect(gameboard.ships.length).toBe(1);
+  expect(gameboard.grid[5][5]).toBe(ship1);
+  expect(gameboard.grid[5][6]).toBe(ship1);
+  expect(gameboard.grid[6][5]).toBe(null);
 });
