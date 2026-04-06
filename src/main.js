@@ -31,15 +31,15 @@ function gameLogic() {
     if (turn === "human") {
       human.attackCoordinates(computer);
 
-      if (computer.gameboard.allSunk() === true) {
-        return console.log("Computer won, all human ships have been sunk");
+      if (computer.gameboard.allSunk()) {
+        return console.log("Human won, all computer ships have been sunk");
       }
 
       turn = "computer";
     } else {
       computer.makeRandomAttack(human);
 
-      if (human.gameboard.allSunk() === true) {
+      if (human.gameboard.allSunk()) {
         return console.log("Computer won, all human ships have been sunk");
       }
 
