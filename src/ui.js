@@ -58,3 +58,21 @@ for (let row = 0; row < 10; row++) {
     opposingBoard.appendChild(btn);
   }
 }
+
+function syncBoard(boardElement, gameboardObject) {
+  boardElement.querySelectorAll("button").forEach((btn) => {
+    let row = parseInt(btn.dataset.row);
+    let col = parseInt(btn.dataset.col);
+
+    let cell = gameboardObject.grid[row][col];
+    if (cell === "hit") {
+      btn.style.backgroundColor = "red";
+    } else if (cell === "miss") {
+      btn.style.backgroundColor = "blue";
+    } else if (cell instanceof Ship) {
+      btn.style.backgroundColor = "green";
+    } else {
+      btn.style.backgroundColor = "grey";
+    }
+  });
+}
