@@ -20,6 +20,14 @@ for (let row = 0; row < 10; row++) {
     const btn = document.createElement("button");
     btn.dataset.row = row;
     btn.dataset.col = col;
+    btn.addEventListener("click", () => {
+      let result = human.attackClick(computer, row, col);
+      if (result === "hit" || result === "miss") {
+        lastAttackDiv.textContent = result;
+      } else if (result === null) {
+        lastAttackDiv.textContent = "Invalid attack, try again";
+      }
+    });
     opposingBoard.appendChild(btn);
   }
 }

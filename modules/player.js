@@ -68,6 +68,14 @@ class Player {
       }
     }
   }
+
+  attackClick(opponent, row, col) {
+    if (opponent.gameboard.canAttack(row, col)) {
+      return opponent.gameboard.receiveAttack(row, col);
+    } else {
+      return null;
+    }
+  }
 }
 
 export default Player;

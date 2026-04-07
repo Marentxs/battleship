@@ -17,7 +17,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px; /* Creates separation between the two boards */
+  gap: 40px;
   padding: 20px;
 }
 
