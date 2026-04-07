@@ -1,15 +1,25 @@
-import Ship from "../modules/Ship.js";
-import Player from "../modules/Player.js";
-import Computer from "../modules/Computer.js";
-import { createElement } from "react";
+import Ship from "../modules/ship.js";
+import Player from "../modules/player.js";
+import Computer from "../modules/computer.js";
+import "./styles.css";
 
-const grid = document.getElementById("grid");
+const ownBoard = document.getElementById("ownBoard");
+const opposingBoard = document.getElementById("oppossingBoard");
 
 for (let row = 0; row < 10; row++) {
   for (let col = 0; col < 10; col++) {
-    const btn = createElement("button");
+    const btn = document.createElement("button");
     btn.dataset.row = row;
     btn.dataset.col = col;
-    grid.appendChild(btn);
+    ownBoard.appendChild(btn);
+  }
+}
+
+for (let row = 0; row < 10; row++) {
+  for (let col = 0; col < 10; col++) {
+    const btn = document.createElement("button");
+    btn.dataset.row = row;
+    btn.dataset.col = col;
+    opposingBoard.appendChild(btn);
   }
 }

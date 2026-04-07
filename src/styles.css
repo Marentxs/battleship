@@ -34,7 +34,8 @@ h6 {
   isolation: isolate;
 }
 
-#grid {
+#ownBoard,
+#oppossingBoard {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
@@ -42,7 +43,8 @@ h6 {
   height: 500px;
 }
 
-#grid button {
+#ownBoard button,
+#oppossingBoard button {
   width: 100%;
   height: 100%;
   cursor: pointer;
