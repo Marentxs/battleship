@@ -13,12 +13,21 @@ body {
   height: 100%;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* Creates separation between the two boards */
+  padding: 20px;
+}
+
 input,
 button,
 textarea,
 select {
   font: inherit;
 }
+
 p,
 h1,
 h2,
@@ -34,6 +43,12 @@ h6 {
   isolation: isolate;
 }
 
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #ownBoard,
 #oppossingBoard {
   display: grid;
@@ -41,6 +56,7 @@ h6 {
   grid-template-rows: repeat(10, 1fr);
   width: 500px;
   height: 500px;
+  border: 2px solid #333;
 }
 
 #ownBoard button,
@@ -48,4 +64,11 @@ h6 {
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+
+#ownBoard button:hover,
+#oppossingBoard button:hover {
+  background-color: #ddd;
 }
