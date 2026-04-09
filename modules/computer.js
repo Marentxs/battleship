@@ -26,7 +26,7 @@ class Computer extends Player {
       const row = Math.floor(Math.random() * 10);
       const col = Math.floor(Math.random() * 10);
 
-      const directions = ["horizontal, vertical"];
+      const directions = ["horizontal", "vertical"];
       const direction = directions[Math.floor(Math.random() * 2)];
 
       if (this.gameboard.canPlace(ownShip, row, col, direction)) {
