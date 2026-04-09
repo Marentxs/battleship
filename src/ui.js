@@ -33,13 +33,14 @@ for (let row = 0; row < 10; row++) {
 
         humanTurn = false;
         lastAttackDiv.textContent = result;
-        btn.style.backgroundColor = "red";
+        syncBoard(opposingBoard, computer.gameboard);
 
         if (computer.gameboard.allSunk()) {
           lastAttackDiv.textContent = "Game ended, you won";
           return;
         } else {
           computer.makeRandomAttack(human);
+          syncBoard(ownBoard, human.gameboard);
           if (human.gameboard.allSunk()) {
             lastAttackDiv.textContent = "Game ended, you lost";
             return;
@@ -69,7 +70,7 @@ function syncBoard(boardElement, gameboardObject) {
       btn.style.backgroundColor = "red";
     } else if (cell === "miss") {
       btn.style.backgroundColor = "blue";
-    } else if (cell instanceof Ship) {
+    } else if (cell instanceof Ship && boardElement === ownBoard) {
       btn.style.backgroundColor = "green";
     } else {
       btn.style.backgroundColor = "grey";
