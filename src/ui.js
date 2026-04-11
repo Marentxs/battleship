@@ -27,6 +27,7 @@ for (let row = 0; row < 10; row++) {
 
       if (human.gameboard.canPlace(current, row, col, direction)) {
         human.gameboard.place(current, row, col, direction);
+        errorInfo.textContent = "Additional info";
         syncBoard(ownBoard, human.gameboard);
         currentShipIndex++;
 
@@ -125,17 +126,18 @@ for (let row = 0; row < 10; row++) {
           .forEach((btn) => (btn.disabled = true));
 
         humanTurn = false;
-        errorInfo.textContent = `Your last shot was a ${result}.`;
+        shipInfo.textContent = `Your last shot was a ${result}.`;
+        errorInfo.textContent = "Additional info";
         syncBoard(opposingBoard, computer.gameboard);
 
         if (computer.gameboard.allSunk()) {
-          errorInfo.textContent = "Game ended, you won";
+          shipInfo.textContent = "Game ended, you won";
           return;
         } else {
           computer.makeRandomAttack(human);
           syncBoard(ownBoard, human.gameboard);
           if (human.gameboard.allSunk()) {
-            errorInfo.textContent = "Game ended, you lost";
+            shipInfo.textContent = "Game ended, you lost";
             return;
           }
           humanTurn = true;
