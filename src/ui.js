@@ -118,7 +118,7 @@ for (let row = 0; row < 10; row++) {
           .forEach((btn) => (btn.disabled = true));
 
         humanTurn = false;
-        lastAttackDiv.textContent = result;
+        lastAttackDiv.textContent = `Your last shot was a ${result}.`;
         syncBoard(opposingBoard, computer.gameboard);
 
         if (computer.gameboard.allSunk()) {
