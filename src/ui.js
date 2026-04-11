@@ -55,13 +55,13 @@ function syncBoard(boardElement, gameboardObject) {
 
     let cell = gameboardObject.grid[row][col];
     if (cell === "hit") {
-      btn.style.backgroundColor = "red";
+      btn.style.backgroundColor = "hsl(0, 60%, 55%)";
     } else if (cell === "miss") {
-      btn.style.backgroundColor = "blue";
+      btn.style.backgroundColor = "hsl(120, 15%, 50%)";
     } else if (cell instanceof Ship && boardElement === ownBoard) {
-      btn.style.backgroundColor = "green";
+      btn.style.backgroundColor = "hsl(30, 15%, 45%)";
     } else {
-      btn.style.backgroundColor = "grey";
+      btn.style.backgroundColor = "hsl(35, 45%, 90%)";
     }
   });
 }
