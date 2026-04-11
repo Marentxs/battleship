@@ -69,15 +69,14 @@ function syncBoard(boardElement, gameboardObject) {
 //Rotate direction
 
 const rotateBtn = document.getElementById("rotateButton");
-const rotateText = document.getElementById("rotateText");
 
 rotateBtn.addEventListener("click", () => {
   if (direction === "horizontal") {
     direction = "vertical";
-    rotateText.innerText = "vertical";
+    rotateBtn.innerText = "vertical";
   } else {
     direction = "horizontal";
-    rotateText.innerText = "horizontal";
+    rotateBtn.innerText = "horizontal";
   }
 });
 
