@@ -86,9 +86,29 @@ h3 {
   font-weight: bold;
 }
 
-#ownBoard button:hover,
-#oppossingBoard button:hover {
-  background-color: #dcc8a8;
+#ownBoard button.ship {
+  background-color: hsl(30, 15%, 45%);
+}
+
+#oppossingBoard button.hit,
+#ownBoard button.hit {
+  background-color: hsl(0, 60%, 55%);
+}
+
+#oppossingBoard button.miss,
+#ownBoard button.miss {
+  background-color: hsl(120, 15%, 50%);
+}
+
+#ownBoard button.empty:hover,
+#oppossingBoard button.empty:hover {
+  background-color: hsl(40, 45%, 75%);
+}
+
+#ownBoard button:disabled,
+#oppossingBoard button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .controls-row {

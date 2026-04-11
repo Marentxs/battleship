@@ -34,6 +34,11 @@ for (let row = 0; row < 10; row++) {
           gamePhase = "attack";
           shipInfo.textContent =
             "All ships placed! Click opponent board to attack";
+
+          ownBoard.querySelectorAll("button").forEach((btn) => {
+            btn.disabled = true;
+          });
+
           computer.placeRandom(shipsComputer[0]);
           computer.placeRandom(shipsComputer[1]);
           computer.placeRandom(shipsComputer[2]);
@@ -54,14 +59,17 @@ function syncBoard(boardElement, gameboardObject) {
     let col = parseInt(btn.dataset.col);
 
     let cell = gameboardObject.grid[row][col];
+
+    btn.className = "";
+
     if (cell === "hit") {
-      btn.style.backgroundColor = "hsl(0, 60%, 55%)";
+      btn.classList.add("hit");
     } else if (cell === "miss") {
-      btn.style.backgroundColor = "hsl(120, 15%, 50%)";
+      btn.classList.add("miss");
     } else if (cell instanceof Ship && boardElement === ownBoard) {
-      btn.style.backgroundColor = "hsl(30, 15%, 45%)";
+      btn.classList.add("ship");
     } else {
-      btn.style.backgroundColor = "hsl(35, 45%, 90%)";
+      btn.classList.add("empty");
     }
   });
 }
