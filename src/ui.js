@@ -6,7 +6,7 @@ import "./styles.css";
 const human = new Player();
 const computer = new Computer();
 
-//Generate boards
+//Generate ownBoard and place listener
 
 const ownBoard = document.getElementById("ownBoard");
 const opposingBoard = document.getElementById("oppossingBoard");
@@ -32,6 +32,8 @@ for (let row = 0; row < 10; row++) {
 
         if (currentShipIndex === shipsHuman.length) {
           gamePhase = "attack";
+          shipInfo.textContent =
+            "All ships placed! Click opponent board to attack";
           computer.placeRandom(shipsComputer[0]);
           computer.placeRandom(shipsComputer[1]);
           computer.placeRandom(shipsComputer[2]);
@@ -79,7 +81,7 @@ rotateBtn.addEventListener("click", () => {
   }
 });
 
-//Place phase
+//Setup and start button
 
 const shipsHuman = [new Ship(5), new Ship(4), new Ship(3), new Ship(2)];
 const shipsComputer = [new Ship(5), new Ship(4), new Ship(3), new Ship(2)];
@@ -94,7 +96,7 @@ start.addEventListener("click", () => {
   shipInfo.textContent = "You can now start placing your ships";
 });
 
-//Attack phase
+//Generate opposingBoard and attack listener
 
 let humanTurn = true;
 for (let row = 0; row < 10; row++) {

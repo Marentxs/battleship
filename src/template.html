@@ -7,25 +7,32 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="lastAttack"></div>
-    <div class="board-container">
-      <h3>Your board</h3>
-      <div class="grid" id="ownBoard"></div>
-    </div>
-    <div class="board-container">
-      <h3>Opponent board</h3>
-      <div class="grid" id="oppossingBoard"></div>
-    </div>
-    <div><button id="startButton">Start</button></div>
-    <div>
-      <button id="rotateButton">Rotate</button>
-      <p id="rotateText">Horizontal</p>
-    </div>
-    <div>
+    <div class="top-info-container">
       <div id="shipInfo">Press Start to begin placing ships</div>
       <div id="errorInfo"></div>
-      <div id="lastAttackDiv"></div>
     </div>
+
+    <div class="boards-row">
+      <div class="board-container">
+        <h3>Your board</h3>
+        <div class="grid" id="ownBoard"></div>
+      </div>
+
+      <div class="board-container">
+        <h3>Opponent board</h3>
+        <div class="grid" id="oppossingBoard"></div>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <button id="startButton">Start</button>
+      <div class="rotate-group">
+        <button id="rotateButton">Rotate</button>
+        <p id="rotateText">Horizontal</p>
+      </div>
+    </div>
+
+    <div id="lastAttackDiv"></div>
 
     <script type="module" src="ui.js"></script>
   </body>

@@ -15,32 +15,32 @@ body {
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   padding: 20px;
 }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
+/* STRIP 1: Top bar — exactly aligned with boards width */
+.top-info-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1040px; /* 500px + 40px gap + 500px */
+  gap: 40px;
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+#shipInfo,
+#errorInfo {
+  flex: 1;
 }
 
-#root,
-#__next {
-  isolation: isolate;
+/* STRIP 2: Boards row — same width as top bar */
+.boards-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 1040px;
 }
 
 .board-container {
@@ -71,4 +71,46 @@ h6 {
 #ownBoard button:hover,
 #oppossingBoard button:hover {
   background-color: #ddd;
+}
+
+/* STRIP 3: Controls row */
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.rotate-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* STRIP 4: Bottom bar */
+#lastAttackDiv {
+  text-align: center;
+  width: 1040px;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
 }
