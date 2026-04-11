@@ -118,17 +118,17 @@ for (let row = 0; row < 10; row++) {
           .forEach((btn) => (btn.disabled = true));
 
         humanTurn = false;
-        lastAttackDiv.textContent = `Your last shot was a ${result}.`;
+        errorInfo.textContent = `Your last shot was a ${result}.`;
         syncBoard(opposingBoard, computer.gameboard);
 
         if (computer.gameboard.allSunk()) {
-          lastAttackDiv.textContent = "Game ended, you won";
+          errorInfo.textContent = "Game ended, you won";
           return;
         } else {
           computer.makeRandomAttack(human);
           syncBoard(ownBoard, human.gameboard);
           if (human.gameboard.allSunk()) {
-            lastAttackDiv.textContent = "Game ended, you lost";
+            errorInfo.textContent = "Game ended, you lost";
             return;
           }
           humanTurn = true;
@@ -138,7 +138,7 @@ for (let row = 0; row < 10; row++) {
             .forEach((btn) => (btn.disabled = false));
         }
       } else if (result === null) {
-        lastAttackDiv.textContent = "Invalid attack, try again";
+        errorInfo.textContent = "Invalid attack, try again";
         humanTurn = true;
       }
     });
