@@ -154,3 +154,37 @@ for (let row = 0; row < 10; row++) {
     opposingBoard.appendChild(btn);
   }
 }
+
+// reset functionality
+
+function resetGame() {
+  gamePhase = "place";
+  humanTurn = true;
+  currentShipIndex = 0;
+  direction = "horizontal";
+
+  for (const ship of shipsHuman) {
+    ship.reset();
+  }
+
+  for (const ship of shipsComputer) {
+    ship.reset();
+  }
+
+  human.gameboard.clear();
+  computer.gameboard.clear();
+
+  start.disabled = false;
+  shipInfo.textContent = "Press Start button to begin placing ships";
+  errorInfo.textContent = "Additional info";
+  rotateBtn.innerText = "horizontal";
+
+  ownBoard.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
+
+  opposingBoard
+    .querySelectorAll("button")
+    .forEach((btn) => (btn.disabled = true));
+
+  syncBoard(ownBoard, human.gameboard);
+  syncBoard(opposingBoard, computer.gameboard);
+}
