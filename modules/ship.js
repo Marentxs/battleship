@@ -16,6 +16,11 @@ class Ship {
       return false;
     }
   }
+
+  reset() {
+    this.hits = 0;
+    this.sunk = false;
+  }
 }
 
 export default Ship;
