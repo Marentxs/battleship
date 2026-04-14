@@ -139,7 +139,7 @@ for (let row = 0; row < 10; row++) {
         if (computer.gameboard.allSunk()) {
           shipInfo.textContent = "Game ended, you won";
           gameActive = false;
-          rotateBtn.innertext = "restart";
+          rotateBtn.innerText = "restart";
           return;
         } else {
           computer.makeRandomAttack(human);
@@ -147,7 +147,7 @@ for (let row = 0; row < 10; row++) {
           if (human.gameboard.allSunk()) {
             shipInfo.textContent = "Game ended, you lost";
             gameActive = false;
-            rotateBtn.innertext = "restart";
+            rotateBtn.innerText = "restart";
             return;
           }
           humanTurn = true;
@@ -186,7 +186,7 @@ function resetGame() {
   computer.gameboard.clear();
 
   start.disabled = false;
-  shipInfo.textContent = "Press Start button to begin placing ships";
+  shipInfo.textContent = "You can now start placing your ships";
   errorInfo.textContent = "Additional info";
   rotateBtn.innerText = "horizontal";
 
@@ -194,7 +194,7 @@ function resetGame() {
 
   opposingBoard
     .querySelectorAll("button")
-    .forEach((btn) => (btn.disabled = true));
+    .forEach((btn) => (btn.disabled = false));
 
   syncBoard(ownBoard, human.gameboard);
   syncBoard(opposingBoard, computer.gameboard);
