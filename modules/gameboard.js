@@ -92,14 +92,14 @@ class Gameboard {
     return this.ships.every((ship) => ship.isSunk());
   }
 
-  clear(gameboard) {
+  clear() {
     for (let row = 0; row < 10; row++) {
       for (let col = 0; col < 10; col++) {
-        gameboard.grid[row][col] = null;
+        this.grid[row][col] = null;
       }
     }
 
-    gameboard.ships = [];
+    this.ships = [];
   }
 }
 

@@ -80,12 +80,16 @@ function syncBoard(boardElement, gameboardObject) {
 const rotateBtn = document.getElementById("rotateButton");
 
 rotateBtn.addEventListener("click", () => {
-  if (direction === "horizontal") {
-    direction = "vertical";
-    rotateBtn.innerText = "vertical";
+  if (gameActive === false) {
+    resetGame();
   } else {
-    direction = "horizontal";
-    rotateBtn.innerText = "horizontal";
+    if (direction === "horizontal") {
+      direction = "vertical";
+      rotateBtn.innerText = "vertical";
+    } else {
+      direction = "horizontal";
+      rotateBtn.innerText = "horizontal";
+    }
   }
 });
 
@@ -97,10 +101,12 @@ const start = document.getElementById("startButton");
 let currentShipIndex = 0;
 let direction = "horizontal";
 let gamePhase = "";
+let gameActive = true;
 
 start.addEventListener("click", () => {
   gamePhase = "place";
   start.disabled = true;
+  gameActive = true;
   shipInfo.textContent = "You can now start placing your ships";
 });
 
@@ -132,12 +138,16 @@ for (let row = 0; row < 10; row++) {
 
         if (computer.gameboard.allSunk()) {
           shipInfo.textContent = "Game ended, you won";
+          gameActive = false;
+          rotateBtn.innertext = "restart";
           return;
         } else {
           computer.makeRandomAttack(human);
           syncBoard(ownBoard, human.gameboard);
           if (human.gameboard.allSunk()) {
             shipInfo.textContent = "Game ended, you lost";
+            gameActive = false;
+            rotateBtn.innertext = "restart";
             return;
           }
           humanTurn = true;
@@ -162,6 +172,7 @@ function resetGame() {
   humanTurn = true;
   currentShipIndex = 0;
   direction = "horizontal";
+  gameActive = true;
 
   for (const ship of shipsHuman) {
     ship.reset();
