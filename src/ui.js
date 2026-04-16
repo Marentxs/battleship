@@ -142,7 +142,7 @@ for (let row = 0; row < 10; row++) {
           rotateBtn.innerText = "restart";
           return;
         } else {
-          computer.makeRandomAttack(human);
+          computer.makeAttack(human);
           syncBoard(ownBoard, human.gameboard);
           if (human.gameboard.allSunk()) {
             shipInfo.textContent = "Game ended, you lost";

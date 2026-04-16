@@ -17,7 +17,7 @@ class Computer extends Player {
 
       if (opponent.gameboard.canAttack(row, col)) {
         attacked = true;
-        result = opponent.gameboard.receiveAttack(row, col);
+        let result = opponent.gameboard.receiveAttack(row, col);
         return { result, row, col };
       }
     }
@@ -28,8 +28,8 @@ class Computer extends Player {
     if (this.nextAttacks.length > 0) {
       const target = this.nextAttacks.shift();
 
-      if (opponent.gameboard.canAttack(target)) {
-        const result = opponent.gameboard.receiveAttack(target);
+      if (opponent.gameboard.canAttack(target.row, target.col)) {
+        const result = opponent.gameboard.receiveAttack(target.row, target.col);
 
         if (result === "hit") {
           this.currentTargetHits.push(target);
@@ -71,7 +71,7 @@ class Computer extends Player {
       const target = validAttacks.shift();
 
       this.nextAttacks.push(...validAttacks);
-      const result = opponent.gameboard.receiveAttack(target);
+      const result = opponent.gameboard.receiveAttack(target.row, target.col);
 
       if (result === "hit") {
         this.currentTargetHits.push(target);
@@ -126,11 +126,11 @@ class Computer extends Player {
         }
       }
 
-      const result = opponent.gameboard.receiveAttack(target);
+      const result = opponent.gameboard.receiveAttack(target.row, target.col);
       if (result === "hit") {
         this.currentTargetHits.push(target);
       } else if (result === "miss") {
-        if (opponent.gameboard.canAttack(otherEnd)) {
+        if (opponent.gameboard.canAttack(otherEnd.row, otherEnd.col)) {
           this.nextAttacks.push(otherEnd);
         }
       }
