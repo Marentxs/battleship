@@ -185,7 +185,7 @@ function resetGame() {
   human.gameboard.clear();
   computer.gameboard.clear();
 
-  start.disabled = false;
+  start.disabled = true;
   shipInfo.textContent = "You can now start placing your ships";
   errorInfo.textContent = "Additional info";
   rotateBtn.innerText = "horizontal";
