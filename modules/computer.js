@@ -17,7 +17,8 @@ class Computer extends Player {
 
       if (opponent.gameboard.canAttack(row, col)) {
         attacked = true;
-        return opponent.gameboard.receiveAttack(row, col);
+        result = opponent.gameboard.receiveAttack(row, col);
+        return { result, row, col };
       }
     }
   }
@@ -26,10 +27,13 @@ class Computer extends Player {
     //Attack from nextAttacks arr
     if (this.nextAttacks.length > 0) {
       const target = this.nextAttacks.shift();
+
       if (opponent.gameboard.canAttack(target)) {
         const result = opponent.gameboard.receiveAttack(target);
+
         if (result === "hit") {
           this.currentTargetHits.push(target);
+          return result;
         } else if (result === "miss") {
           return result;
         }
@@ -37,10 +41,13 @@ class Computer extends Player {
 
       //Random attack
     } else if (this.currentTargetHits.length === 0) {
-      const result = this.makeRandomAttack(opponent);
+      const resultObject = this.makeRandomAttack(opponent);
+      const { result, row, col } = resultObject;
+
       if (result === "hit") {
-        currentTargetHits.push(coordinates);
+        this.currentTargetHits.push({ row, col });
       }
+
       return result;
 
       //Adjacent squares
@@ -54,13 +61,20 @@ class Computer extends Player {
       ];
 
       const validAttacks = potentialAttacks.filter((attack) =>
-        this.canAttack(attack.row, attack.col),
+        opponent.gameboard.canAttack(attack.row, attack.col),
       );
+      if (validAttacks.length === 0) {
+        this.currentTargetHits = [];
+        return null;
+      }
+
       const target = validAttacks.shift();
+
+      this.nextAttacks.push(...validAttacks);
       const result = opponent.gameboard.receiveAttack(target);
+
       if (result === "hit") {
         this.currentTargetHits.push(target);
-      } else if (result === "miss") {
       }
       return result;
 
@@ -68,9 +82,10 @@ class Computer extends Player {
     } else if (this.currentTargetHits.length >= 2) {
       const direction =
         this.currentTargetHits[0].col === this.currentTargetHits[1].col
-          ? "horizontal"
-          : "vertical";
+          ? "vertical"
+          : "horizontal";
 
+      let target;
       let otherEnd;
 
       if (direction === "horizontal") {
@@ -88,6 +103,7 @@ class Computer extends Player {
           otherEnd = { row: max.row, col: max.col + 1 };
         } else {
           this.currentTargetHits = [];
+          return null;
         }
       }
 
@@ -118,6 +134,7 @@ class Computer extends Player {
           this.nextAttacks.push(otherEnd);
         }
       }
+      return result;
     }
     return result;
   }
