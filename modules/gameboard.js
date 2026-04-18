@@ -59,11 +59,12 @@ class Gameboard {
   }
 
   canAttack(row, column) {
-    const target = this.grid[row][column];
-
     if (row < 0 || row > 9 || column < 0 || column > 9) {
       return false;
     }
+
+    const target = this.grid[row][column];
+
     if (target === "hit" || target === "miss") {
       return false;
     }
