@@ -247,3 +247,14 @@ function onDrag(event) {
     left: event.clientX - offsetX + "px",
   });
 }
+
+function stopDrag() {
+  if (!isDragging) return;
+  cloneElement.remove();
+
+  document.removeEventListener("mousemove", onDrag);
+  document.removeEventListener("mouseup", stopDrag);
+
+  isDragging = false;
+  cloneElement = null;
+}
