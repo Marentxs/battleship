@@ -203,6 +203,7 @@ function resetGame() {
 // drag and drop functionality
 
 let isDragging = false;
+let cloneElement = null;
 
 function startDrag(event, ship) {
   let length = ship.length;
@@ -210,6 +211,7 @@ function startDrag(event, ship) {
   isDragging = true;
 
   const clone = ship.cloneNode(true);
+  cloneElement = clone;
 
   const rect = originalShip.getBoundingClientRect();
   const offsetX = event.clientX - rect.left;
@@ -222,6 +224,7 @@ function startDrag(event, ship) {
     margin: "0",
     zIndex: "9999",
   });
+
   //stored for later
   clone.dataset.offsetX = offsetX;
   clone.dataset.offsetY = offsetY;
@@ -230,4 +233,17 @@ function startDrag(event, ship) {
   e.preventDefault();
   document.addEventListener("mousemove", onDrag);
   document.addEventListener("mouseup", stopDrag);
+}
+
+function onDrag(event) {
+  if (!isDragging || !cloneElement) return;
+  let clone = cloneElement;
+
+  const offsetY = parseFloat(clone.dataset.offsetY);
+  const offsetX = parseFloat(clone.dataset.offsetX);
+
+  Object.assign(clone.style, {
+    top: event.clientY - offsetY + "px",
+    left: event.clientX - offsetX + "px",
+  });
 }
