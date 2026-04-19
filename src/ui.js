@@ -199,3 +199,35 @@ function resetGame() {
   syncBoard(ownBoard, human.gameboard);
   syncBoard(opposingBoard, computer.gameboard);
 }
+
+// drag and drop functionality
+
+let isDragging = false;
+
+function startDrag(event, ship) {
+  let length = ship.length;
+  const originalShip = ship;
+  isDragging = true;
+
+  const clone = ship.cloneNode(true);
+
+  const rect = originalShip.getBoundingClientRect();
+  const offsetX = event.clientX - rect.left;
+  const offsetY = event.clientY - rect.top;
+
+  Object.assign(clone.style, {
+    position: "absolute",
+    top: event.clientY - offsetY + "px",
+    left: event.clientX - offsetX + "px",
+    margin: "0",
+    zIndex: "9999",
+  });
+  //stored for later
+  clone.dataset.offsetX = offsetX;
+  clone.dataset.offsetY = offsetY;
+
+  document.body.appendChild(clone);
+  e.preventDefault();
+  document.addEventListener("mousemove", onDrag);
+  document.addEventListener("mouseup", stopDrag);
+}
