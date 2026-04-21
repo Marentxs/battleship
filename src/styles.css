@@ -212,3 +212,20 @@ a:hover {
 .ship:active {
   cursor: grabbing;
 }
+
+.highlight {
+  background-color: hsl(40, 45%, 75%) !important;
+}
+
+.ship-cell {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border: 1px solid #333;
+}
+
+.ship {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}

@@ -76,6 +76,7 @@ start.addEventListener("click", () => {
   start.disabled = true;
   gameActive = true;
   shipInfo.textContent = "You can now start placing your ships";
+  renderDraggableShips();
 });
 
 //Generate opposingBoard and attack listener
@@ -317,3 +318,18 @@ document.querySelectorAll(".ship").forEach((shipElement, index) => {
     startDrag(event, shipElement, shipObject);
   });
 });
+
+// generate cells for each ship
+
+function renderDraggableShips() {
+  document.querySelectorAll(".ship").forEach((ship) => {
+    const length = parseInt(ship.dataset.length);
+    ship.innerHTML = "";
+
+    for (let i = 0; i < length; i++) {
+      const div = document.createElement("div");
+      div.classList.add("ship-cell");
+      ship.appendChild(div);
+    }
+  });
+}
