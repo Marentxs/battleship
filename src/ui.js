@@ -204,6 +204,7 @@ function resetGame() {
 
 let isDragging = false;
 let cloneElement = null;
+let currentCell = null;
 
 function startDrag(event, ship) {
   let length = ship.length;
@@ -246,6 +247,25 @@ function onDrag(event) {
     top: event.clientY - offsetY + "px",
     left: event.clientX - offsetX + "px",
   });
+
+  const board = document.getElementById("ownBoard");
+  let cell = getGridCellFromMouse(event, board, cellWidth, cellHeight);
+
+  if (currentCell !== null) {
+    currentCell.classList.remove("highlight");
+    currentCell = null;
+  }
+
+  if (cell) {
+    const { row, col } = cell;
+    const button = board.querySelector(
+      `button[data-row='${row}'][data-col='${col}']`,
+    );
+    if (button) {
+      button.classList.add("highlight");
+      currentCell = button;
+    }
+  }
 }
 
 function stopDrag() {
