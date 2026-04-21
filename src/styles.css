@@ -201,3 +201,14 @@ a:hover {
   text-decoration: underline;
   color: #c8b28b;
 }
+
+.ship {
+  background-color: gray;
+  text-align: center;
+  line-height: 40px;
+  cursor: grab;
+}
+
+.ship:active {
+  cursor: grabbing;
+}

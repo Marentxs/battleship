@@ -251,7 +251,7 @@ function onDrag(event) {
   });
 
   const board = document.getElementById("ownBoard");
-  let cell = getGridCellFromMouse(event, board, cellWidth, cellHeight);
+  let cell = getGridCellFromMouse(event, board);
 
   if (currentCell !== null) {
     currentCell.classList.remove("highlight");
@@ -298,8 +298,10 @@ function stopDrag() {
 
 // helper to get cell that mouse hovers
 
-function getGridCellFromMouse(event, boardElement, cellWidth, cellHeight) {
+function getGridCellFromMouse(event, boardElement) {
   const rect = boardElement.getBoundingClientRect();
+  const cellWidth = rect.width / 10;
+  const cellHeight = rect.height / 10;
 
   const mouseX = event.clientX - rect.left;
   const mouseY = event.clientY - rect.top;
