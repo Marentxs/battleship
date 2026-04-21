@@ -17,38 +17,6 @@ for (let row = 0; row < 10; row++) {
     btn.dataset.row = row;
     btn.dataset.col = col;
     ownBoard.appendChild(btn);
-
-    btn.addEventListener("click", () => {
-      if (gamePhase !== "place") return;
-
-      let row = parseInt(btn.dataset.row);
-      let col = parseInt(btn.dataset.col);
-      let current = shipsHuman[currentShipIndex];
-
-      if (human.gameboard.canPlace(current, row, col, direction)) {
-        human.gameboard.place(current, row, col, direction);
-        errorInfo.textContent = "Additional info";
-        syncBoard(ownBoard, human.gameboard);
-        currentShipIndex++;
-
-        if (currentShipIndex === shipsHuman.length) {
-          gamePhase = "attack";
-          shipInfo.textContent =
-            "All ships placed! Click opponent board to attack";
-
-          ownBoard.querySelectorAll("button").forEach((btn) => {
-            btn.disabled = true;
-          });
-
-          computer.placeRandom(shipsComputer[0]);
-          computer.placeRandom(shipsComputer[1]);
-          computer.placeRandom(shipsComputer[2]);
-          computer.placeRandom(shipsComputer[3]);
-        }
-      } else {
-        errorInfo.textContent = "Invalid cell to place try another cell";
-      }
-    });
   }
 }
 
@@ -209,6 +177,10 @@ let draggedShipObject = null;
 let draggedShipElement = null;
 
 function startDrag(event, shipElement, shipObject) {
+  if (gamePhase !== "place") {
+    return;
+  }
+
   draggedShipElement = shipElement;
   draggedShipObject = shipObject;
   isDragging = true;
@@ -285,6 +257,20 @@ function stopDrag() {
 
     if (human.gameboard.canPlace(draggedShipObject, row, col, direction)) {
       human.gameboard.place(draggedShipObject, row, col, direction);
+      if (human.gameboard.ships.length === 4) {
+        gamePhase = "attack";
+        shipInfo.textContent =
+          "All ships placed! Click opponent board to attack";
+
+        ownBoard.querySelectorAll("button").forEach((btn) => {
+          btn.disabled = true;
+        });
+
+        computer.placeRandom(shipsComputer[0]);
+        computer.placeRandom(shipsComputer[1]);
+        computer.placeRandom(shipsComputer[2]);
+        computer.placeRandom(shipsComputer[3]);
+      }
 
       if (draggedShipElement) {
         draggedShipElement.remove();
