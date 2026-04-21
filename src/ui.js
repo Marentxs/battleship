@@ -205,16 +205,18 @@ function resetGame() {
 let isDragging = false;
 let cloneElement = null;
 let currentCell = null;
+let draggedShipObject = null;
+let draggedShipElement = null;
 
-function startDrag(event, ship) {
-  let length = ship.length;
-  const originalShip = ship;
+function startDrag(event, shipElement, shipObject) {
+  draggedShipElement = shipElement;
+  draggedShipObject = shipObject;
   isDragging = true;
 
-  const clone = ship.cloneNode(true);
+  const clone = shipElement.cloneNode(true);
   cloneElement = clone;
 
-  const rect = originalShip.getBoundingClientRect();
+  const rect = shipElement.getBoundingClientRect();
   const offsetX = event.clientX - rect.left;
   const offsetY = event.clientY - rect.top;
 
@@ -231,7 +233,7 @@ function startDrag(event, ship) {
   clone.dataset.offsetY = offsetY;
 
   document.body.appendChild(clone);
-  e.preventDefault();
+  event.preventDefault();
   document.addEventListener("mousemove", onDrag);
   document.addEventListener("mouseup", stopDrag);
 }
@@ -270,14 +272,31 @@ function onDrag(event) {
 
 function stopDrag() {
   if (!isDragging) return;
-  cloneElement.remove();
 
+  cloneElement.remove();
   document.removeEventListener("mousemove", onDrag);
   document.removeEventListener("mouseup", stopDrag);
-
   isDragging = false;
   cloneElement = null;
+
+  if (currentCell) {
+    const row = parseInt(currentCell.dataset.row);
+    const col = parseInt(currentCell.dataset.col);
+
+    if (human.gameboard.canPlace(draggedShipObject, row, col, direction)) {
+      human.gameboard.place(draggedShipObject, row, col, direction);
+
+      if (draggedShipElement) {
+        draggedShipElement.remove();
+      }
+      syncBoard(ownBoard, human.gameboard);
+    }
+    currentCell.classList.remove("highlight");
+    currentCell = null;
+  }
 }
+
+// helper to get cell that mouse hovers
 
 function getGridCellFromMouse(event, boardElement, cellWidth, cellHeight) {
   const rect = boardElement.getBoundingClientRect();
