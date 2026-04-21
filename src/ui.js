@@ -258,3 +258,23 @@ function stopDrag() {
   isDragging = false;
   cloneElement = null;
 }
+
+function getGridCellFromMouse(event, boardElement, cellWidth, cellHeight) {
+  const rect = boardElement.getBoundingClientRect();
+
+  const mouseX = event.clientX - rect.left;
+  const mouseY = event.clientY - rect.top;
+
+  if (
+    mouseX >= 0 &&
+    mouseX < rect.width &&
+    mouseY >= 0 &&
+    mouseY < rect.height
+  ) {
+    const col = Math.floor(mouseX / cellWidth);
+    const row = Math.floor(mouseY / cellHeight);
+    return { row, col };
+  } else {
+    return null;
+  }
+}
