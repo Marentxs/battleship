@@ -159,6 +159,9 @@ function resetGame() {
   rotateBtn.innerText = "horizontal";
 
   ownBoard.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
+  document.querySelectorAll(".ship").forEach((ship) => {
+    ship.style.display = "flex";
+  });
 
   opposingBoard
     .querySelectorAll("button")
@@ -273,7 +276,7 @@ function stopDrag() {
       }
 
       if (draggedShipElement) {
-        draggedShipElement.remove();
+        draggedShipElement.style.display = "none";
       }
       syncBoard(ownBoard, human.gameboard);
     }
