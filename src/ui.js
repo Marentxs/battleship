@@ -317,3 +317,12 @@ function getGridCellFromMouse(event, boardElement, cellWidth, cellHeight) {
     return null;
   }
 }
+
+// attack drag and drop listener
+
+document.querySelectorAll(".ship").forEach((shipElement, index) => {
+  const shipObject = shipsHuman[index];
+  shipElement.addEventListener("mousedown", (event) => {
+    startDrag(event, shipElement, shipObject);
+  });
+});
