@@ -168,6 +168,9 @@ function resetGame() {
   document.querySelectorAll(".ship-wrapper").forEach((ship) => {
     ship.style.display = "";
   });
+  document.querySelectorAll(".ship").forEach((ship) => {
+    ship.style.flexDirection = "row";
+  });
 
   opposingBoard
     .querySelectorAll("button")
@@ -184,6 +187,7 @@ let cloneElement = null;
 let currentCell = null;
 let draggedShipObject = null;
 let draggedShipElement = null;
+let currentHighlightedCells = [];
 
 function startDrag(event, shipElement, shipObject) {
   if (gamePhase !== "place") {
@@ -234,8 +238,16 @@ function onDrag(event) {
   const board = document.getElementById("ownBoard");
   let cell = getGridCellFromMouse(event, board);
 
+  if (cell) {
+    highlightShipCells(cell.row, cell.col, draggedShipObject.length, direction);
+  } else {
+    for (let i = 0; i < currentHighlightedCells.length; i++) {
+      currentHighlightedCells[i].classList.remove("highlight");
+    }
+    currentHighlightedCells.length = 0;
+  }
+
   if (currentCell !== null) {
-    currentCell.classList.remove("highlight");
     currentCell = null;
   }
 
@@ -245,7 +257,6 @@ function onDrag(event) {
       `button[data-row='${row}'][data-col='${col}']`,
     );
     if (button) {
-      button.classList.add("highlight");
       currentCell = button;
     }
   }
@@ -289,6 +300,11 @@ function stopDrag() {
     }
     currentCell.classList.remove("highlight");
     currentCell = null;
+
+    for (let i = 0; i < currentHighlightedCells.length; i++) {
+      currentHighlightedCells[i].classList.remove("highlight");
+    }
+    currentHighlightedCells.length = 0;
   }
 }
 
@@ -339,4 +355,34 @@ function renderDraggableShips() {
       ship.appendChild(div);
     }
   });
+}
+
+// helper for ship hover
+
+function highlightShipCells(startRow, startCol, shipLength, direction) {
+  for (let i = 0; i < currentHighlightedCells.length; i++) {
+    currentHighlightedCells[i].classList.remove("highlight");
+  }
+  currentHighlightedCells.length = 0;
+
+  for (let i = 0; i < shipLength; i++) {
+    let row, col;
+    if (direction === "horizontal") {
+      row = startRow;
+      col = startCol + i;
+    } else {
+      row = startRow + i;
+      col = startCol;
+    }
+
+    if (row >= 0 && row < 10 && col >= 0 && col < 10) {
+      const button = ownBoard.querySelector(
+        `button[data-row='${row}'][data-col='${col}']`,
+      );
+      if (button) {
+        button.classList.add("highlight");
+        currentHighlightedCells.push(button);
+      }
+    }
+  }
 }
