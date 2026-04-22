@@ -4,6 +4,9 @@
 
 A Battleship game built with vanilla JavaScript, with drag-and-drop ship placement and turn-based combat against a computer with intelligent attacks.
 
+<img width="1824" height="1045" alt="image" src="https://github.com/user-attachments/assets/4b83d668-dcd1-4954-9d4c-67265db2e4cd" />
+
+
 ## Features
 
 - **Drag-and-Drop Ship Placement** - Place your ships by dragging them onto the game board
