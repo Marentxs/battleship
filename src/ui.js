@@ -59,12 +59,16 @@ rotateBtn.addEventListener("click", () => {
         ship.style.flexDirection = "column";
         ship.style.alignItems = "center";
       });
+      document.body.style.justifyContent = "flex-start";
+      document.body.style.paddingTop = "40px";
     } else {
       direction = "horizontal";
       rotateBtn.innerText = "horizontal";
       document.querySelectorAll(".ship").forEach((ship) => {
         ship.style.flexDirection = "row";
       });
+      document.body.style.justifyContent = "center";
+      document.body.style.paddingTop = "";
     }
   }
 });
@@ -148,6 +152,7 @@ function resetGame() {
   currentShipIndex = 0;
   direction = "horizontal";
   gameActive = true;
+  document.body.style.justifyContent = "center";
 
   for (const ship of shipsHuman) {
     ship.reset();
