@@ -19,6 +19,7 @@ for (let row = 0; row < 10; row++) {
     ownBoard.appendChild(btn);
   }
 }
+renderDraggableShips();
 
 //Visual update
 
@@ -76,7 +77,6 @@ start.addEventListener("click", () => {
   start.disabled = true;
   gameActive = true;
   shipInfo.textContent = "You can now start placing your ships";
-  renderDraggableShips();
 });
 
 //Generate opposingBoard and attack listener
@@ -160,8 +160,8 @@ function resetGame() {
   rotateBtn.innerText = "horizontal";
 
   ownBoard.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
-  document.querySelectorAll(".ship").forEach((ship) => {
-    ship.style.display = "flex";
+  document.querySelectorAll(".ship-wrapper").forEach((ship) => {
+    ship.style.display = "";
   });
 
   opposingBoard
@@ -277,7 +277,8 @@ function stopDrag() {
       }
 
       if (draggedShipElement) {
-        draggedShipElement.style.display = "none";
+        const wrapper = draggedShipElement.closest(".ship-wrapper");
+        wrapper.style.display = "none";
       }
       syncBoard(ownBoard, human.gameboard);
     }
@@ -324,6 +325,7 @@ document.querySelectorAll(".ship").forEach((shipElement, index) => {
 function renderDraggableShips() {
   document.querySelectorAll(".ship").forEach((ship) => {
     const length = parseInt(ship.dataset.length);
+    const text = ship.textContent;
     ship.innerHTML = "";
 
     for (let i = 0; i < length; i++) {

@@ -202,10 +202,43 @@ a:hover {
   color: #c8b28b;
 }
 
-.ship {
-  background-color: gray;
+.highlight {
+  background-color: hsl(40, 45%, 75%) !important;
+}
+
+.ships-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1040px;
+  margin-top: 20px;
+}
+
+.ship-wrapper {
+  background-color: #e8dcc8;
+  border: 3px solid #2c2418;
+  padding: 12px;
+  min-width: 120px;
   text-align: center;
-  line-height: 40px;
+}
+
+.ship-label {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  color: #2c2418;
+  font-size: 0.9rem;
+}
+
+.ship {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  justify-content: center;
   cursor: grab;
 }
 
@@ -213,19 +246,8 @@ a:hover {
   cursor: grabbing;
 }
 
-.highlight {
-  background-color: hsl(40, 45%, 75%) !important;
-}
-
 .ship-cell {
-  width: 30px;
-  height: 30px;
-  background-color: #ccc;
-  border: 1px solid #333;
-}
-
-.ship {
-  display: flex;
-  flex-direction: row;
-  gap: 2px;
+  width: 50px;
+  height: 50px;
+  background-color: hsl(30, 15%, 45%);
 }
