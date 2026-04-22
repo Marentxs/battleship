@@ -55,9 +55,16 @@ rotateBtn.addEventListener("click", () => {
     if (direction === "horizontal") {
       direction = "vertical";
       rotateBtn.innerText = "vertical";
+      document.querySelectorAll(".ship").forEach((ship) => {
+        ship.style.flexDirection = "column";
+        ship.style.alignItems = "center";
+      });
     } else {
       direction = "horizontal";
       rotateBtn.innerText = "horizontal";
+      document.querySelectorAll(".ship").forEach((ship) => {
+        ship.style.flexDirection = "row";
+      });
     }
   }
 });

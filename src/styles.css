@@ -210,7 +210,7 @@ a:hover {
   flex-direction: row;
   gap: 20px;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-wrap: wrap;
   width: 1040px;
 }
