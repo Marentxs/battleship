@@ -102,7 +102,6 @@ for (let row = 0; row < 10; row++) {
 
         humanTurn = false;
         shipInfo.textContent = `Your last shot was a ${result}.`;
-        errorInfo.textContent = "Additional info";
         syncBoard(opposingBoard, computer.gameboard);
 
         if (computer.gameboard.allSunk()) {
@@ -126,7 +125,7 @@ for (let row = 0; row < 10; row++) {
             .forEach((btn) => (btn.disabled = false));
         }
       } else if (result === null) {
-        errorInfo.textContent = "Invalid attack, try again";
+        shipInfo.textContent = "Invalid attack, try again";
         humanTurn = true;
       }
     });
@@ -156,7 +155,6 @@ function resetGame() {
 
   start.disabled = true;
   shipInfo.textContent = "You can now start placing your ships";
-  errorInfo.textContent = "Additional info";
   rotateBtn.innerText = "horizontal";
 
   ownBoard.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
