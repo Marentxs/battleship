@@ -8,17 +8,26 @@ module.exports = {
     filename: "ui.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "/battleship/",
   },
   devtool: "eval-source-map",
   devServer: {
     watchFiles: ["./src/template.html"],
+    static: {
+      directory: path.join(__dirname, "dist"),
+      publicPath: "/battleship/",
+    },
+    devMiddleware: {
+      publicPath: "/battleship/",
+    },
+    open: true,
+    port: 8080,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
     }),
   ],
-
   module: {
     rules: [
       {

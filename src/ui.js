@@ -170,6 +170,10 @@ function resetGame() {
   rotateBtn.innerText = "horizontal";
 
   ownBoard.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
+  opposingBoard
+    .querySelectorAll("button")
+    .forEach((btn) => (btn.disabled = false));
+
   document.querySelectorAll(".ship-wrapper").forEach((ship) => {
     ship.style.display = "";
   });
@@ -177,9 +181,8 @@ function resetGame() {
     ship.style.flexDirection = "row";
   });
 
-  opposingBoard
-    .querySelectorAll("button")
-    .forEach((btn) => (btn.disabled = false));
+  document.body.style.justifyContent = "center";
+  document.body.style.paddingTop = "";
 
   syncBoard(ownBoard, human.gameboard);
   syncBoard(opposingBoard, computer.gameboard);
